@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajos Universitarios</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>¡Te ayudamos con tus trabajos universitarios!</h1>
+    </header>
+    <main>
+        <section class="description">
+            <p>Por solo 8 euros, realiza tu pedido ahora y recibe ayuda para tus trabajos.</p>
+        </section>
+        <section class="form-section">
+            <form id="orderForm">
+                <label for="details">Detalles del trabajo:</label>
+                <textarea id="details" name="details" required placeholder="Escribe aquí los detalles de tu trabajo"></textarea>
+
+                <h2>Envíanos tu documento</h2>
+                <p>Por favor, envía el documento a este correo: <strong>tuemail@example.com</strong>.</p>
+
+                <h2>Método de pago: Bizum</h2>
+                <p>Envía 8€ al número <strong>644523366</strong> mediante Bizum. Una vez enviado, confirma aquí:</p>
+
+                <label for="paymentConfirmation">Referencia del pago:</label>
+                <input type="text" id="paymentConfirmation" name="paymentConfirmation" required placeholder="Ingresa la referencia del pago">
+
+                <button type="button" onclick="sendEmail()">Confirmar pedido</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Trabajos Universitarios. Todos los derechos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("DNzHYMrPq5S60OVLS"); // Public Key
+        })();
+
+        function sendEmail() {
+            var form = document.getElementById('orderForm');
+            emailjs.send("service_mz52wfx", "template_97pm41n", {
+                details: form.details.value,
+                paymentConfirmation: form.paymentConfirmation.value
+            }).then(function(response) {
+                alert('Correo enviado con éxito. ¡Gracias por tu pedido!');
+            }, function(error) {
+                alert('Error al enviar el correo: ' + JSON.stringify(error));
+            });
+        }
+    </script>
+</body>
+</html>
